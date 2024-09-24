@@ -1,1 +1,1 @@
-# Nsight-System-Nsight-Compute
+# Nsight_System_Nsight_Compute
