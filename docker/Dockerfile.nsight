@@ -1,0 +1,38 @@
+# 使用官方的 NVIDIA CUDA 基礎映像
+FROM nvidia/cuda:11.8.0-cudnn8-devel-ubuntu18.04
+
+# 設置非互動模式，以避免安裝過程中需要手動輸入
+ENV DEBIAN_FRONTEND=noninteractive
+
+# 更新和安裝必要的包
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    g++ \
+    gnupg \
+    software-properties-common \
+    wget && \
+    rm -rf /var/lib/apt/lists/*
+
+# Add the NVIDIA package repositories
+RUN echo "deb http://developer.download.nvidia.com/devtools/repos/ubuntu$(source /etc/lsb-release; echo "$DISTRIB_RELEASE" | tr -d .)/$(dpkg --print-architecture) /" | tee /etc/apt/sources.list.d/nvidia-devtools.list
+RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/7fa2af80.pub
+
+# update package list
+RUN apt update || true 
+
+# install nsight-systems and nsight-compute
+RUN apt install -y nsight-systems-2022.4.2 nsight-compute-2022.3.0
+
+# 安裝 CUDA 範例
+RUN git clone https://github.com/NVIDIA/cuda-samples.git /usr/local/cuda-samples
+
+# 設置環境變數
+ENV PATH="/opt/nvidia/nsight-compute/2022.3.0/:${PATH}"
+
+# 設置工作目錄
+WORKDIR /workspace
+
+# 預設運行的命令
+CMD ["bash"]
