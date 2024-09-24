@@ -22,19 +22,19 @@ Make sure to replace `cuda_nsight:v0.1` with the appropriate image name and vers
 
 
 ## How to use nvprof
-基本命令  
-  1. 簡單分析
-  ```bash
-  nvprof ./your_cuda_application
-  ```
-  2. 輸出到 .nvprof 文件, 可以通过 nvprof 或 nvvp 工具进行后续分析
-  ```bash
-  nvprof --output-profile my_profile.nvprof ./your_cuda_application
-  ```
-  3. 輸出到 .nvvp , 用于 NVIDIA Visual Profiler (nvvp) 中的可视化分析。
-  ```bash
-  nvprof --export-profile my_timeline_report.nvvp ./your_cuda_application
-  ```
+Basic commands:
+1. Simple analysis:
+```bash
+nvprof ./your_cuda_application
+```
+2. Output to .nvprof file for further analysis with nvprof or nvvp tools:
+```bash
+nvprof --output-profile my_profile.nvprof ./your_cuda_application
+```
+3. Output to .nvvp file for visualization analysis in NVIDIA Visual Profiler (nvvp):
+```bash
+nvprof --export-profile my_timeline_report.nvvp ./your_cuda_application
+```
 
 Event and Metrics  
   1. all events
@@ -45,7 +45,7 @@ Event and Metrics
   ```bash
   nvprof --events event1,event2 ./your_cuda_application
   ```
-  3. certain metrics and 輸出到.nvvp
+  3. certain metrics and output to .nvvp
   ```bash
   nvprof --metrics metric1,metric2 --export-profile my_timeline_report.nvvp  ./your_cuda_application
   ```
@@ -54,7 +54,7 @@ Event and Metrics
 ### User guide
 https://docs.nvidia.com/nsight-systems/UserGuide/index.html  
 
-  1. 簡單分析
+  1. Simple Analysis
   ```bash
    nsys profile ./your_cuda_application
    nsys profile --stats=true ./your_cuda_application
